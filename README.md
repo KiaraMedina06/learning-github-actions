@@ -1,1 +1,3 @@
-# learning-github-actions
+.github/
+  workflows/
+    primer-workflow.yml
