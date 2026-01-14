@@ -166,4 +166,26 @@ jobs:
       - name: Ejecutar tests
         run: pytest
 ```
+# 📦 CAPÍTULO 9 – ARTEFACTOS (SUBIR / BAJAR ARCHIVOS)
+
+En este capítulo aprenderás a **guardar archivos generados en un job** y **recuperarlos en otro job** usando **Artifacts** en GitHub Actions.  
+Esto es muy útil para reportes, resultados de tests, archivos compilados, modelos, logs, etc.
+
+---
+
+## 🔼 Subir archivos (Upload Artifact)
+
+```yaml
+- uses: actions/upload-artifact@v4
+  with:
+    name: resultados
+    path: output/
+```
+## 🔽 Descargar archivos
+
+```yaml
+- uses: actions/download-artifact@v4
+  with:
+    name: resultados
+```
 
