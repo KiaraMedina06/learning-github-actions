@@ -1,0 +1,38 @@
+name: CI con Artifacts
+
+on: [push]
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Crear archivos de salida
+        run: |
+          mkdir output
+          echo "Resultado del procesamiento" > output/resultados.txt
+          echo "Pipeline ejecutado correctamente" > output/log.txt
+
+      - name: Subir artefactos
+        uses: actions/upload-artifact@v4
+        with:
+          name: resultados
+          path: output/
+
+  consumir:
+    runs-on: ubuntu-latest
+    needs: generar
+
+    steps:
+      - name: Descargar artefactos
+        uses: actions/download-artifact@v4
+        with:
+          name: resultados
+
+      - name: Ver archivos descargados
+        run: |
+          ls
+          cat resultados.txt
+          cat log.txt
