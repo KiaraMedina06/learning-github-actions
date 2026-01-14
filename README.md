@@ -108,5 +108,28 @@ on:
   schedule:
     - cron: '0 2 * * *'   # todos los días a las 2am
 ```
+# 🧠 CAPÍTULO 5 – VARIABLES Y SECRETOS (GitHub Actions)
 
+En este capítulo aprenderás a usar **variables de entorno (`env`)** y **secrets** para configurar y proteger tus workflows en GitHub Actions sin exponer información sensible.
+
+---
+
+## 🔐 1. Variables de entorno (`env`)
+
+Las variables de entorno se usan para **configuración**, como entornos, nombres de proyectos, regiones, etc.
+
+### 📌 Definir variables
+
+```yaml
+env:
+  APP_ENV: production
+```
+
+## 🔐 2. Secrets (credenciales)
+
+GitHub → Repo → Settings → Secrets → Actions → New secret
+
+```yaml
+run: echo "${{ secrets.AZURE_CLIENT_ID }}"
+```
 
