@@ -1,0 +1,21 @@
+name: CI con Condiciones
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ejecutar siempre
+        run: echo "Este step se ejecuta en cualquier rama"
+
+      - name: Solo en main
+        if: github.ref == 'refs/heads/main'
+        run: echo "Ejecutando solo en la rama main"
+
+      - name: Solo en develop
+        if: github.ref == 'refs/heads/develop'
+        run: echo "Ejecutando solo en la rama develop"
