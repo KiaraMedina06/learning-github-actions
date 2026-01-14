@@ -77,5 +77,36 @@ jobs:
 
       - name: Mostrar mensaje
         run: echo "Hola Paquito, GitHub Actions funciona!"
+## ⚡ CAPÍTULO 4 – EVENTOS (TRIGGERS)
+
+Los *triggers* definen **cuándo se ejecuta tu workflow**.
+
+---
+
+### 🔹 Ejecutar al hacer push
+
+```yaml
+on: push
+```
+### 🔹 En Pull Requests
+
+```yaml
+on: pull_request
+```
+### 🔹 Manual (botón "Run workflow")
+
+Permite ejecutar el workflow manualmente desde la interfaz de GitHub.
+
+```yaml
+on: workflow_dispatch
+```
+
+### 🔹 Programado (cron)
+
+```yaml
+on:
+  schedule:
+    - cron: '0 2 * * *'   # todos los días a las 2am
+```
 
 
