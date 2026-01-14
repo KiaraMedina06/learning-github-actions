@@ -5,7 +5,7 @@
 
 ## 🧩 CAPÍTULO 1 – ¿QUÉ ES GITHUB ACTIONS?
 
-### ✅ ¿Para qué sirve?
+### ✅ ¿Para qué sirve? 
 
 GitHub Actions es una plataforma de automatización integrada en GitHub que te permite:
 
