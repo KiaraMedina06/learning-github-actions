@@ -133,3 +133,37 @@ GitHub → Repo → Settings → Secrets → Actions → New secret
 run: echo "${{ secrets.AZURE_CLIENT_ID }}"
 ```
 
+# 🧪 CAPÍTULO 6 – EJECUTAR CÓDIGO REAL (PYTHON)
+
+En este capítulo ejecutamos **código Python real** dentro de GitHub Actions usando un pipeline de **CI (Integración Continua)** que instala dependencias y corre pruebas automáticamente en cada `push`.
+
+---
+
+## 🐍 Workflow para Python (CI)
+
+```yaml
+name: CI Python
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Ejecutar tests
+        run: pytest
+```
+
