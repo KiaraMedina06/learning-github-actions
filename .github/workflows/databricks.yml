@@ -1,0 +1,29 @@
+name: Databricks CI/CD
+
+# Este workflow se ejecuta al hacer push en main
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  run-databricks-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Descargar el código del repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configurar Python (opcional si necesitas scripts adicionales)
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      # 3️⃣ Ejecutar Job en Databricks
+      - name: Ejecutar Job Databricks
+        run: |
+          echo "Iniciando Job en Databricks..."
+          curl -X POST https://adb-xxxx.azuredatabricks.net/api/2.1/jobs/run-now \
+            -H "Authorization: Bearer ${{ secrets.DATABRICKS_TOKEN }}" \
+            -d '{"job_id": 123}'
