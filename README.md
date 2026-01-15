@@ -189,3 +189,16 @@ Esto es muy útil para reportes, resultados de tests, archivos compilados, model
     name: resultados
 ```
 
+## 🚀 CAPÍTULO 10 – CI/CD: DEPLOY AUTOMÁTICO
+
+### ☁ Ejemplo: Azure Web App
+
+Este paso despliega automáticamente tu aplicación a **Azure App Service** usando GitHub Actions.
+
+```yaml
+- name: Deploy a Azure
+  uses: azure/webapps-deploy@v2
+  with:
+    app-name: mi-app
+    publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+```
