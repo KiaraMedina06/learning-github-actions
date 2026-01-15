@@ -196,6 +196,44 @@ Esto es muy útil para reportes, resultados de tests, archivos compilados, model
 Este paso despliega automáticamente tu aplicación a **Azure App Service** usando GitHub Actions.
 
 ```yaml
+name: CI/CD Azure Web App
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login a Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Deploy a Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: mi-app
+          publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+```
+
+# 🐳 CAPÍTULO 11 – DOCKER + GITHUB ACTIONS
+
+En este capítulo aprenderás cómo construir una imagen Docker y publicarla automáticamente en Docker Hub usando GitHub Actions.
+
+---
+
+## 🔨 Construir la imagen Docker
+
+```yaml
+- name: Build imagen
+  run: docker build -t miapp:latest .
+
 - name: Deploy a Azure
   uses: azure/webapps-deploy@v2
   with:
