@@ -240,3 +240,38 @@ En este capítulo aprenderás cómo construir una imagen Docker y publicarla aut
     app-name: mi-app
     publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
 ```
+# 🧠 CAPÍTULO 12 – CASOS REALES (DATA ENGINEER)
+
+En este capítulo veremos un caso práctico de **automatización de procesos en Databricks** desde GitHub Actions, algo muy común para Data Engineers.
+
+---
+
+## 📡 Llamar un Job de Databricks desde GitHub Actions
+
+Se puede ejecutar un **job programado en Databricks** directamente desde un workflow de GitHub Actions usando la API de Databricks.
+
+### Ejemplo de Workflow: `.github/workflows/databricks-job.yml`
+
+```yaml
+name: Ejecutar Job Databricks
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  run-databricks-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Descargar el código del repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Ejecutar Job en Databricks
+      - name: Ejecutar Job Databricks
+        run: |
+          echo "Iniciando Job en Databricks..."
+          curl -X POST https://adb-xxxx.azuredatabricks.net/api/2.1/jobs/run-now \
+            -H "Authorization: Bearer ${{ secrets.DATABRICKS_TOKEN }}" \
+            -d '{"job_id": 123}'
